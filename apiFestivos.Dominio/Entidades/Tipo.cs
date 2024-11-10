@@ -9,6 +9,6 @@ namespace apiFestivos.Dominio.Entidades
         [Column("Id")]
         public int Id { get; set; }
         [Column("Tipo"), StringLength(100)]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
     }
 }

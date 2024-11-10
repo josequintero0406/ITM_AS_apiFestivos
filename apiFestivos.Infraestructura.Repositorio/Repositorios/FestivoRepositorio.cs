@@ -6,7 +6,7 @@ using apiFestivos.Core.Interfaces.Repositorios;
 
 namespace apiFestivos.Infraestructura.Repositorio.Repositorios
 {
-        public class FestivoRepositorio : IFestivoRepositorio
+    public class FestivoRepositorio : IFestivoRepositorio
     {
         private FestivosContexto context;
 
@@ -19,7 +19,7 @@ namespace apiFestivos.Infraestructura.Repositorio.Repositorios
         {
             return (Festivo)(await context.Festivos
                 .Include(item => item.Tipo) // Incluye el Tipo
-                .FirstOrDefaultAsync(item => item.Id == Id));
+                .FirstOrDefaultAsync(item => item.Id == Id))!;
         }
 
         public async Task<IEnumerable<Festivo>> ObtenerTodos()
@@ -32,7 +32,7 @@ namespace apiFestivos.Infraestructura.Repositorio.Repositorios
         public async Task<IEnumerable<Festivo>> Buscar(string Dato)
         {
             return await context.Festivos
-                                   .Where(item => item.Nombre.Contains(Dato)) // Filtrar elementos 
+                                   .Where(item => item.Nombre!.Contains(Dato)) // Filtrar elementos 
                                    .Include(item => item.Tipo) // Incluye el Tipo
                                    .ToListAsync(); // Convertir a una lista IEnumerable<Festivo>
         }
@@ -48,11 +48,11 @@ namespace apiFestivos.Infraestructura.Repositorio.Repositorios
             var FestivoExistente = await context.Festivos.FindAsync(Festivo.Id);
             if (FestivoExistente == null)
             {
-                return null;
+                return null!;
             }
             context.Entry(FestivoExistente).CurrentValues.SetValues(Festivo);
             await context.SaveChangesAsync();
-            return (Festivo)(await context.Festivos.FindAsync(Festivo.Id));
+            return (Festivo)(await context.Festivos.FindAsync(Festivo.Id))!;
         }
 
         public async Task<bool> Eliminar(int Id)

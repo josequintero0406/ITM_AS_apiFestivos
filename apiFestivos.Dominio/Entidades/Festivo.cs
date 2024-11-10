@@ -9,7 +9,7 @@ namespace apiFestivos.Dominio.Entidades
         [Column("Id")]
         public int Id { get; set; }
         [Column("Nombre"), StringLength(100)]
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
         [Column("Dia")]
         public int Dia { get; set; }
         [Column("Mes")]
