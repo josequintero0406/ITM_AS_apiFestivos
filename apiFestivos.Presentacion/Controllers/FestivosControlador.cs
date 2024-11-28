@@ -57,7 +57,7 @@ namespace apiFestivos.Presentacion.Controllers
         [HttpGet("listar/{Year}")]
         public async Task<ActionResult<IEnumerable<FechaFestivo>>> ObtenerAño(int Year)
         {
-            return Ok(await servicio.ObtenerAño(Year));
+            return Ok(await servicio.ObtenerAnio(Year));
         }
 
         [HttpGet("Verificar/{Year}/{Mes}/{Dia}")]

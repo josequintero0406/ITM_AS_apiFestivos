@@ -19,7 +19,7 @@ namespace apiFestivos.Core.Interfaces.Servicios
 
         //********** Consultas //**********
 
-        Task<IEnumerable<FechaFestivo>> ObtenerAño(int Año);
+        Task<IEnumerable<FechaFestivo>> ObtenerAnio(int Año);
 
         Task<bool> EsFestivo(DateTime Fecha);
     }

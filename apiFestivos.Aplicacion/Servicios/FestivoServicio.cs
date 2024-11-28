@@ -113,7 +113,7 @@ namespace apiFestivos.Aplicacion.Servicios
             return fechaFestivo;
         }
 
-        public async Task<IEnumerable<FechaFestivo>> ObtenerAño(int Año)
+        public async Task<IEnumerable<FechaFestivo>> ObtenerAnio(int Año)
         {
             var festivos = await repositorio.ObtenerTodos();
 
@@ -128,7 +128,7 @@ namespace apiFestivos.Aplicacion.Servicios
         public async Task<bool> EsFestivo(DateTime Fecha)
         {
             // Obtener los festivos para el año específico
-            var festivos = await ObtenerAño(Fecha.Year);
+            var festivos = await ObtenerAnio(Fecha.Year);
 
             // Verificar si la fecha existe en la lista de festivos
             return festivos.Any(f => f.Fecha.Date == Fecha.Date);

@@ -93,7 +93,7 @@ namespace apiFestivos.Pruebas
             _festivoRepositorioMock.Setup(f => f.ObtenerTodos()).ReturnsAsync(listaFestivos).Verifiable();
 
             // Act
-            var resultado = await _festivoServicio.ObtenerAño(year);
+            var resultado = await _festivoServicio.ObtenerAnio(year);
             var fechaFestivaResultante = resultado.Where(item => item.Fecha == fechaEsperada).ToList();
 
             // Assert
@@ -116,7 +116,7 @@ namespace apiFestivos.Pruebas
             _festivoRepositorioMock.Setup(f => f.ObtenerTodos()).ReturnsAsync(listaFestivos).Verifiable();
 
             // Act
-            var resultado = await _festivoServicio.ObtenerAño(year);
+            var resultado = await _festivoServicio.ObtenerAnio(year);
             var fechaLunesSiguiente = resultado
                 .Where(item => item.Fecha == fechaInicial.AddDays(diasLunes)).ToList();
 
@@ -137,7 +137,7 @@ namespace apiFestivos.Pruebas
             _festivoRepositorioMock.Setup(f => f.ObtenerTodos()).ReturnsAsync(listaFestivos).Verifiable();
 
             // Act
-            var resultado = await _festivoServicio.ObtenerAño(year);
+            var resultado = await _festivoServicio.ObtenerAnio(year);
 
             // Assert
             Assert.Equal(new DateTime(2024, 5, 6), resultado.First().Fecha);
