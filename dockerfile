@@ -5,7 +5,7 @@ ENV ASPNETCORE_URLS:http://+:5289
 
 EXPOSE 5289
 
-FROM mcr.microsoft.com/docnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
 
