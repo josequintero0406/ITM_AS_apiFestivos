@@ -7,44 +7,78 @@ namespace apiFestivos.Aplicacion.Servicios
 {
     public class FestivoServicio : IFestivoServicio
     {
+        /// <summary>
+        /// solo lectura
+        /// </summary>
         private readonly IFestivoRepositorio repositorio;
-
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="repositorio"></param>
         public FestivoServicio(IFestivoRepositorio repositorio)
         {
             this.repositorio = repositorio;
         }
-
+        /// <summary>
+        /// obtener
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<Festivo> Obtener(int Id)
         {
             return await repositorio.Obtener(Id);
         }
-
+        /// <summary>
+        /// obtener todos
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Festivo>> ObtenerTodos()
         {
             return await repositorio.ObtenerTodos();
         }
+        /// <summary>
+        /// buscar
+        /// </summary>
+        /// <param name="Dato"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Festivo>> Buscar(string Dato)
         {
             return await repositorio.Buscar(Dato);
         }
-
+        /// <summary>
+        /// agregar
+        /// </summary>
+        /// <param name="Festivo"></param>
+        /// <returns></returns>
         public async Task<Festivo> Agregar(Festivo Festivo)
         {
             return await repositorio.Agregar(Festivo);
         }
-
+        /// <summary>
+        /// modificar
+        /// </summary>
+        /// <param name="Festivo"></param>
+        /// <returns></returns>
         public async Task<Festivo> Modificar(Festivo Festivo)
         {
             return await repositorio.Modificar(Festivo);
         }
-
+        /// <summary>
+        /// eliminar
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<bool> Eliminar(int Id)
         {
             return await repositorio.Eliminar(Id);
         }
 
         //********** Consultas //**********
-
+        /// <summary>
+        /// obtener inicio de semana santa
+        /// </summary>
+        /// <param name="año"></param>
+        /// <returns></returns>
         private DateTime ObtenerInicioSemanaSanta(int año)
         {
             int a = año % 19;
@@ -63,19 +97,33 @@ namespace apiFestivos.Aplicacion.Servicios
             }
             return new DateTime(año, mes, dia);
         }
-
+        /// <summary>
+        /// agregar dias
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <param name="dias"></param>
+        /// <returns></returns>
         private DateTime AgregarDias(DateTime fecha, int dias)
         {
             return fecha.AddDays(dias);
         }
-
+        /// <summary>
+        /// siguiente lunes
+        /// </summary>
+        /// <param name="fecha"></param>
+        /// <returns></returns>
         private DateTime SiguienteLunes(DateTime fecha)
         {
             DayOfWeek diaSemana = fecha.DayOfWeek;
             int diasLunes = ((int)DayOfWeek.Monday - (int)diaSemana + 7) % 7;
             return AgregarDias(fecha, diasLunes);
         }
-
+        /// <summary>
+        /// obtener festivo
+        /// </summary>
+        /// <param name="año"></param>
+        /// <param name="festivo"></param>
+        /// <returns></returns>
         private FechaFestivo ObtenerFestivo(int año, Festivo festivo)
         {
             FechaFestivo fechaFestivo = null!;
@@ -112,7 +160,11 @@ namespace apiFestivos.Aplicacion.Servicios
             }
             return fechaFestivo;
         }
-
+        /// <summary>
+        /// obtener anio
+        /// </summary>
+        /// <param name="Año"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<FechaFestivo>> ObtenerAnio(int Año)
         {
             var festivos = await repositorio.ObtenerTodos();
@@ -124,7 +176,11 @@ namespace apiFestivos.Aplicacion.Servicios
             }
             return fechaFestivos;
         }
-
+        /// <summary>
+        /// es festivo o no
+        /// </summary>
+        /// <param name="Fecha"></param>
+        /// <returns></returns>
         public async Task<bool> EsFestivo(DateTime Fecha)
         {
             // Obtener los festivos para el año específico
